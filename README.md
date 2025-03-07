@@ -3,7 +3,7 @@
 - Teacher model - VGG16
 - Student model - MobileNetV2
 
-### 3. Train the model
+### 1. Train the model
 To train the VGG16 model
 ```bash
 # use gpu to train vgg16
@@ -25,7 +25,7 @@ $ python knowledge_distillation_train.py -gpu -teacher path_to_best_vgg16_weight
 The weights file with the best accuracy would be written to the disk with name suffix 'best' (default in checkpoint folder).
 
 
-### 4. test the model
+### 2. test the model
 Test the VGG16 model 
 ```bash
 $ python test.py -net vgg16 -weights path_to_best_vgg16_weights_file
