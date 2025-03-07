@@ -1,29 +1,7 @@
-# Knowledge Distillation from VGG16 to Mobilenet
+# Knowledge Distillation from VGG16 to MobileNetV2
 
 - Teacher model - VGG16
-- Student model - Mobilenet
-
-## Requirements
-
-- python 3.10
-- pytorch 2.2.1+cu121
-- ptflops
-
-## Usage
-### 1. Models
-#### VGG16
-VGG16, a renowned CNN architecture from the University of Oxford, excels in image classification with its 16 layers and simple structure. It comprises 13 convolutional and 3 fully connected layers, employing 3x3 filters and 2x2 max-pooling. Despite its effectiveness, its size and depth can be computationally intensive.
-
-#### MobileNet
-MobileNet, developed by Google, is tailored for mobile and embedded devices, featuring 28 layers and innovative depthwise separable convolutions. This reduces parameters and computational complexity while maintaining performance. MobileNet adapts to various input sizes and is widely used for transfer learning, albeit potentially sacrificing some accuracy for efficiency.
-
-### 2. Dataset
-We have used the CIFAR-100 dataset. 
-- It contains 60,000 color images.
-- Images are of size 32x32 pixels.
-- The dataset is organized into 100 classes, each containing 600 images.
-- There are 50,000 training images and 10,000 testing images.
-- Each image is labeled with one of the 100 fine-grained classes.
+- Student model - MobileNetV2
 
 ### 3. Train the model
 To train the VGG16 model
@@ -62,19 +40,3 @@ Test the knowledge distilled mobilenet model
 ```bash
 $ python knowledge_distillation_test.py -gpu -weights path_to_best_knowledge_distilled_mobilenet_weights_file
 ```
-
-## Implementation Details and References
-
-- VGG [Very Deep Convolutional Networks for Large-Scale Image Recognition](https://arxiv.org/abs/1409.1556v6)
-- Mobilenet [MobileNets: Efficient Convolutional Neural Networks for Mobile Vision Applications](https://arxiv.org/abs/1704.04861)
-- Hyperparameter settings [Improved Regularization of Convolutional Neural Networks with Cutout](https://arxiv.org/abs/1708.04552v2), which is init lr = 0.1 divided by 5 at 60th, 120th, 160th epochs, trained for 200 epochs with batchsize 128 and weight decay 5e-4, Nesterov momentum of 0.9.
-- Code reference [GitHub : weiaicunzai](https://github.com/weiaicunzai/pytorch-cifar10)
-
-## Results
-
-|dataset|network|learning rate|batch size|size (MB)|params|top1 err|top5 err|time(ms) per inference step (CPU)|time(ms) per inference step (CPU)|FLOPs|
-|:-----:|:-----:|:----:|:----:|:------:|:----:|:------:|:------:|:--------------:|:--------------:|:---------:|
-|cifar10|vgg16|0.1|128|136.52|34.0M|27.77|10.12|177.2584|10.7589|334.14|
-|cifar10|mobilenet|0.1|128|24.03|3.32M|33.06|10.15|57.6361|9.0793|48.32|
-|cifar10|knowledge distilled mobilenet|0.1|128|24.03|3.32M|32.61|10.26|56.7409|9.6162|48.32|
-|cifar10|knowledge distilled mobilenet|0.001|64|24.03|3.32M|32.16|10.83|58.2087|9.0350|48.32|
