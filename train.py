@@ -67,7 +67,7 @@ def test(net, test_loader, loss_function, device, best_acc, save_path):
     
     return best_acc, accuracy
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-net', type=str, default='vgg16', help='network type (default: vgg16)')
     parser.add_argument('-b', type=int, default=128, help='batch size')
