@@ -8,6 +8,8 @@ import os
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 from models.vgg import VGG, make_layers, cfg
+from models.mobilenet import MobileNetV2Student
+
 
 # Training function with accuracy calculation
 def train(net, train_loader, optimizer, loss_function, device):
@@ -96,9 +98,11 @@ if __name__ == '__main__':
     
     # Model selection
     if args.net == 'vgg16':
-        net = VGG(make_layers(cfg['D'], batch_norm=True), num_class=10).to(device)
+      net = VGG(make_layers(cfg['D'], batch_norm=True), num_class=10).to(device)
+    elif args.net == 'mobilenetv2':
+      net = MobileNetV2Student(num_classes=10).to(device)
     else:
-        raise ValueError(f'Unsupported network type: {args.net}')
+     raise ValueError(f'Unsupported network type: {args.net}')
     
     loss_function = nn.CrossEntropyLoss()
     optimizer = optim.SGD(net.parameters(), lr=args.lr, momentum=0.9, weight_decay=5e-4)
