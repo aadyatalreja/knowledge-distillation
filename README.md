@@ -13,7 +13,7 @@ $ python train.py -net vgg16 -gpu
 To train the Mobilenet model
 ```bash
 # use gpu to train mobilenet
-$ python train.py -net mobilenet -gpu
+$ python train.py -net mobilenetv2 -gpu
 ```
 
 To perform knowledge distillation from the trained VGG16 to the Mobilenet model
@@ -33,7 +33,7 @@ $ python test.py -net vgg16 -weights path_to_best_vgg16_weights_file
 
 Test the mobilenet model 
 ```bash
-$ python test.py -net mobilenet -weights path_to_best_mobilenet_weights_file
+$ python test.py -net mobilenetv2 -weights path_to_best_mobilenetv2_weights_file
 ```
 
 Test the knowledge distilled mobilenet model 
